@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Data | Malaria inequality</title>
+  <meta name="description" content="Code for malaria inequality analysis" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Data | Malaria inequality" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Code for malaria inequality analysis" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Data | Malaria inequality" />
+  
+  <meta name="twitter:description" content="Code for malaria inequality analysis" />
+  
+
+<meta name="author" content="Gabriel Carrasco-Escobar" />
+
+
+<meta name="date" content="2020-10-26" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="analysis-wealth.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+<script src="libs/leaflet-providers-plugin-2.0.3/leaflet-providers-plugin.js"></script>
+<link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
+<script src="libs/HomeButton-0.0.1/home-button.js"></script>
+<script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+<script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+<link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+<link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Malaria Inequality</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preamble</a></li>
+<li class="chapter" data-level="2" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2</b> Data</a><ul>
+<li class="chapter" data-level="2.1" data-path="data.html"><a href="data.html#dhs-data"><i class="fa fa-check"></i><b>2.1</b> DHS Data</a></li>
+<li class="chapter" data-level="2.2" data-path="data.html"><a href="data.html#gps-data"><i class="fa fa-check"></i><b>2.2</b> GPS Data</a></li>
+<li class="chapter" data-level="2.3" data-path="data.html"><a href="data.html#adm-data"><i class="fa fa-check"></i><b>2.3</b> ADM Data</a></li>
+<li class="chapter" data-level="2.4" data-path="data.html"><a href="data.html#assemble"><i class="fa fa-check"></i><b>2.4</b> Assemble</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="analysis-wealth.html"><a href="analysis-wealth.html"><i class="fa fa-check"></i><b>3</b> Analysis Wealth</a><ul>
+<li class="chapter" data-level="3.1" data-path="analysis-wealth.html"><a href="analysis-wealth.html#processing---wealth"><i class="fa fa-check"></i><b>3.1</b> Processing - Wealth</a></li>
+<li class="chapter" data-level="3.2" data-path="analysis-wealth.html"><a href="analysis-wealth.html#spatial-data---wealth"><i class="fa fa-check"></i><b>3.2</b> Spatial data - Wealth</a></li>
+<li class="chapter" data-level="3.3" data-path="analysis-wealth.html"><a href="analysis-wealth.html#distributions---wealth"><i class="fa fa-check"></i><b>3.3</b> Distributions - Wealth</a></li>
+<li class="chapter" data-level="3.4" data-path="analysis-wealth.html"><a href="analysis-wealth.html#ci---wealth"><i class="fa fa-check"></i><b>3.4</b> CI - Wealth</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="analysis-wealth.html"><a href="analysis-wealth.html#plots-ci---wealth"><i class="fa fa-check"></i><b>3.4.1</b> Plots CI - Wealth</a></li>
+<li class="chapter" data-level="3.4.2" data-path="analysis-wealth.html"><a href="analysis-wealth.html#maps-ci---wealth"><i class="fa fa-check"></i><b>3.4.2</b> Maps CI - Wealth</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="analysis-wealth.html"><a href="analysis-wealth.html#sii---wealth"><i class="fa fa-check"></i><b>3.5</b> SII - Wealth</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="analysis-wealth.html"><a href="analysis-wealth.html#plots-sii---wealth"><i class="fa fa-check"></i><b>3.5.1</b> Plots SII - Wealth</a></li>
+<li class="chapter" data-level="3.5.2" data-path="analysis-wealth.html"><a href="analysis-wealth.html#maps-sii---wealth"><i class="fa fa-check"></i><b>3.5.2</b> Maps SII - Wealth</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="analysis-wealth.html"><a href="analysis-wealth.html#rii---wealth"><i class="fa fa-check"></i><b>3.6</b> RII - Wealth</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="analysis-wealth.html"><a href="analysis-wealth.html#plots-rii---wealth"><i class="fa fa-check"></i><b>3.6.1</b> Plots RII - Wealth</a></li>
+<li class="chapter" data-level="3.6.2" data-path="analysis-wealth.html"><a href="analysis-wealth.html#maps-rii---wealth"><i class="fa fa-check"></i><b>3.6.2</b> Maps RII - Wealth</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="analysis-wealth.html"><a href="analysis-wealth.html#summary---wealth"><i class="fa fa-check"></i><b>3.7</b> Summary - Wealth</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="analysis-education.html"><a href="analysis-education.html"><i class="fa fa-check"></i><b>4</b> Analysis Education</a><ul>
+<li class="chapter" data-level="4.1" data-path="analysis-education.html"><a href="analysis-education.html#processing---education"><i class="fa fa-check"></i><b>4.1</b> Processing - Education</a></li>
+<li class="chapter" data-level="4.2" data-path="analysis-education.html"><a href="analysis-education.html#spatial-data---education"><i class="fa fa-check"></i><b>4.2</b> Spatial data - Education</a></li>
+<li class="chapter" data-level="4.3" data-path="analysis-education.html"><a href="analysis-education.html#ci---education"><i class="fa fa-check"></i><b>4.3</b> CI - Education</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="analysis-education.html"><a href="analysis-education.html#plots-ci--education"><i class="fa fa-check"></i><b>4.3.1</b> Plots CI -Education</a></li>
+<li class="chapter" data-level="4.3.2" data-path="analysis-education.html"><a href="analysis-education.html#maps-ci---education"><i class="fa fa-check"></i><b>4.3.2</b> Maps CI - Education</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="analysis-education.html"><a href="analysis-education.html#sii---education"><i class="fa fa-check"></i><b>4.4</b> SII - Education</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="analysis-education.html"><a href="analysis-education.html#plots-sii---education"><i class="fa fa-check"></i><b>4.4.1</b> Plots SII - Education</a></li>
+<li class="chapter" data-level="4.4.2" data-path="analysis-education.html"><a href="analysis-education.html#maps-sii---education"><i class="fa fa-check"></i><b>4.4.2</b> Maps SII - Education</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="analysis-education.html"><a href="analysis-education.html#rii---education"><i class="fa fa-check"></i><b>4.5</b> RII - Education</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="analysis-education.html"><a href="analysis-education.html#plots-rii---education"><i class="fa fa-check"></i><b>4.5.1</b> Plots RII - Education</a></li>
+<li class="chapter" data-level="4.5.2" data-path="analysis-education.html"><a href="analysis-education.html#maps-rii---education"><i class="fa fa-check"></i><b>4.5.2</b> Maps RII - Education</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="analysis-education.html"><a href="analysis-education.html#summary--education"><i class="fa fa-check"></i><b>4.6</b> Summary -Education</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="spatial-analysis.html"><a href="spatial-analysis.html"><i class="fa fa-check"></i><b>5</b> Spatial Analysis</a><ul>
+<li class="chapter" data-level="5.1" data-path="spatial-analysis.html"><a href="spatial-analysis.html#processing"><i class="fa fa-check"></i><b>5.1</b> Processing</a></li>
+<li class="chapter" data-level="5.2" data-path="spatial-analysis.html"><a href="spatial-analysis.html#wealth"><i class="fa fa-check"></i><b>5.2</b> Wealth</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="spatial-analysis.html"><a href="spatial-analysis.html#w-ci"><i class="fa fa-check"></i><b>5.2.1</b> W-CI</a></li>
+<li class="chapter" data-level="5.2.2" data-path="spatial-analysis.html"><a href="spatial-analysis.html#w-sii"><i class="fa fa-check"></i><b>5.2.2</b> W-SII</a></li>
+<li class="chapter" data-level="5.2.3" data-path="spatial-analysis.html"><a href="spatial-analysis.html#w-rii"><i class="fa fa-check"></i><b>5.2.3</b> W-RII</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="spatial-analysis.html"><a href="spatial-analysis.html#education"><i class="fa fa-check"></i><b>5.3</b> Education</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="spatial-analysis.html"><a href="spatial-analysis.html#e-ci"><i class="fa fa-check"></i><b>5.3.1</b> E-CI</a></li>
+<li class="chapter" data-level="5.3.2" data-path="spatial-analysis.html"><a href="spatial-analysis.html#e-sii"><i class="fa fa-check"></i><b>5.3.2</b> E-SII</a></li>
+<li class="chapter" data-level="5.3.3" data-path="spatial-analysis.html"><a href="spatial-analysis.html#e-rii"><i class="fa fa-check"></i><b>5.3.3</b> E-RII</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Malaria inequality</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Data</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="data.html#cb1-1"></a><span class="co">#save.image(&quot;~/mal_ineq/_dat/mal_ineq_dat4.RData&quot;)</span></span>
+<span id="cb1-2"><a href="data.html#cb1-2"></a><span class="kw">load</span>(<span class="st">&quot;./_dat/mal_ineq_dat4.RData&quot;</span>)</span></code></pre></div>
+<div id="dhs-data" class="section level2">
+<h2><span class="header-section-number">2.1</span> DHS Data</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="data.html#cb2-1"></a><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</span>
+<span id="cb2-2"><a href="data.html#cb2-2"></a><span class="kw">library</span>(purrr)</span>
+<span id="cb2-3"><a href="data.html#cb2-3"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb2-4"><a href="data.html#cb2-4"></a><span class="kw">library</span>(haven)</span>
+<span id="cb2-5"><a href="data.html#cb2-5"></a><span class="kw">library</span>(janitor)</span>
+<span id="cb2-6"><a href="data.html#cb2-6"></a><span class="kw">library</span>(labelled)</span>
+<span id="cb2-7"><a href="data.html#cb2-7"></a><span class="kw">library</span>(magrittr)</span>
+<span id="cb2-8"><a href="data.html#cb2-8"></a></span>
+<span id="cb2-9"><a href="data.html#cb2-9"></a>files &lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="dt">path =</span> <span class="st">&quot;./_dat/DHS/&quot;</span>, <span class="dt">pattern =</span> <span class="st">&quot;*.DTA&quot;</span> , <span class="dt">recursive =</span> T, <span class="dt">full.names =</span> T)</span>
+<span id="cb2-10"><a href="data.html#cb2-10"></a></span>
+<span id="cb2-11"><a href="data.html#cb2-11"></a>dat &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">filename =</span> files) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb2-12"><a href="data.html#cb2-12"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">country =</span> <span class="kw">str_sub</span>(filename, <span class="dv">-12</span>,<span class="op">-</span><span class="dv">11</span>),</span>
+<span id="cb2-13"><a href="data.html#cb2-13"></a>         <span class="dt">type =</span> <span class="kw">str_sub</span>(filename, <span class="dv">-10</span>,<span class="op">-</span><span class="dv">9</span>),</span>
+<span id="cb2-14"><a href="data.html#cb2-14"></a>         <span class="dt">file_contents =</span> <span class="kw">map</span>(<span class="dt">.x =</span> filename, <span class="dt">.f =</span> <span class="op">~</span><span class="kw">read_stata</span>(.))) <span class="op">%&gt;%</span></span>
+<span id="cb2-15"><a href="data.html#cb2-15"></a><span class="st">  </span><span class="kw">filter</span>(type<span class="op">==</span><span class="st">&quot;PR&quot;</span>)</span>
+<span id="cb2-16"><a href="data.html#cb2-16"></a>  </span>
+<span id="cb2-17"><a href="data.html#cb2-17"></a><span class="co"># Function ========</span></span>
+<span id="cb2-18"><a href="data.html#cb2-18"></a>info &lt;-<span class="st"> </span><span class="cf">function</span>(dat) {</span>
+<span id="cb2-19"><a href="data.html#cb2-19"></a>  a &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">var_names =</span> <span class="kw">colnames</span>(dat),</span>
+<span id="cb2-20"><a href="data.html#cb2-20"></a>                <span class="dt">var_lab1 =</span> <span class="kw">var_label</span>(dat, <span class="dt">unlist =</span> T),</span>
+<span id="cb2-21"><a href="data.html#cb2-21"></a>                <span class="dt">var_lab =</span> <span class="kw">as.character</span>(var_lab1),</span>
+<span id="cb2-22"><a href="data.html#cb2-22"></a>                <span class="dt">var_lab_make =</span> <span class="kw">make_clean_names</span>(var_lab)) <span class="op">%&gt;%</span></span>
+<span id="cb2-23"><a href="data.html#cb2-23"></a><span class="st">    </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span>var_lab1)</span>
+<span id="cb2-24"><a href="data.html#cb2-24"></a>  <span class="kw">return</span>(a)</span>
+<span id="cb2-25"><a href="data.html#cb2-25"></a>}</span>
+<span id="cb2-26"><a href="data.html#cb2-26"></a><span class="co"># Function ========</span></span>
+<span id="cb2-27"><a href="data.html#cb2-27"></a></span>
+<span id="cb2-28"><a href="data.html#cb2-28"></a><span class="co"># Variables summary/matches</span></span>
+<span id="cb2-29"><a href="data.html#cb2-29"></a>d0 &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st">  </span></span>
+<span id="cb2-30"><a href="data.html#cb2-30"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">codebook =</span> <span class="kw">map</span>(<span class="dt">.x =</span> file_contents, <span class="dt">.f =</span> <span class="op">~</span><span class="kw">info</span>(.x))) <span class="op">%&gt;%</span></span>
+<span id="cb2-31"><a href="data.html#cb2-31"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(country, codebook) <span class="op">%&gt;%</span></span>
+<span id="cb2-32"><a href="data.html#cb2-32"></a><span class="st">  </span><span class="kw">unnest</span>(<span class="dt">cols =</span> <span class="kw">c</span>(codebook)) </span>
+<span id="cb2-33"><a href="data.html#cb2-33"></a></span>
+<span id="cb2-34"><a href="data.html#cb2-34"></a>d1 &lt;-<span class="st"> </span>d0 <span class="op">%&gt;%</span></span>
+<span id="cb2-35"><a href="data.html#cb2-35"></a><span class="st">  </span><span class="kw">group_by</span>(var_lab_make) <span class="op">%&gt;%</span></span>
+<span id="cb2-36"><a href="data.html#cb2-36"></a><span class="st">  </span><span class="kw">count</span>()</span>
+<span id="cb2-37"><a href="data.html#cb2-37"></a></span>
+<span id="cb2-38"><a href="data.html#cb2-38"></a>vars &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;region&quot;</span>,<span class="st">&quot;province&quot;</span>,<span class="st">&quot;result_of_malaria_measurement&quot;</span>, <span class="st">&quot;wealth_index_factor_score_5_decimals&quot;</span>, <span class="st">&quot;wealth_index_factor_score_combined_5_decimals&quot;</span>,</span>
+<span id="cb2-39"><a href="data.html#cb2-39"></a>          <span class="st">&quot;mothers_highest_educational_level&quot;</span>, <span class="st">&quot;primary_sampling_unit&quot;</span>, <span class="st">&quot;ultimate_area_unit&quot;</span>, <span class="st">&quot;household_sample_weight_6_decimals&quot;</span>,</span>
+<span id="cb2-40"><a href="data.html#cb2-40"></a>          <span class="st">&quot;sample_weight&quot;</span>, <span class="st">&quot;result_of_malaria_rapid_test&quot;</span>, <span class="st">&quot;result_of_malaria_rapid_test_2&quot;</span>, <span class="st">&quot;result_of_rapid_test_of_malaria&quot;</span>,</span>
+<span id="cb2-41"><a href="data.html#cb2-41"></a>          <span class="st">&quot;year_of_interview&quot;</span>, <span class="st">&quot;cluster_number&quot;</span>)</span>
+<span id="cb2-42"><a href="data.html#cb2-42"></a></span>
+<span id="cb2-43"><a href="data.html#cb2-43"></a><span class="co"># Selected variables</span></span>
+<span id="cb2-44"><a href="data.html#cb2-44"></a></span>
+<span id="cb2-45"><a href="data.html#cb2-45"></a>dat_s &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span></span>
+<span id="cb2-46"><a href="data.html#cb2-46"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">subset0 =</span> <span class="kw">map</span>(<span class="dt">.x =</span> file_contents, <span class="dt">.f =</span> <span class="op">~</span><span class="kw">set_colnames</span>(.x, <span class="kw">var_label</span>(.) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">data_frame</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unlist</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb2-47"><a href="data.html#cb2-47"></a><span class="st">                        </span><span class="kw">clean_names</span>() <span class="op">%&gt;%</span></span>
+<span id="cb2-48"><a href="data.html#cb2-48"></a><span class="st">                        </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="kw">any_of</span>(vars)) <span class="op">%&gt;%</span></span>
+<span id="cb2-49"><a href="data.html#cb2-49"></a><span class="st">                        </span><span class="kw">set_colnames</span>(<span class="kw">var_label</span>(.) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">data_frame</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unlist</span>()) <span class="op">%&gt;%</span></span>
+<span id="cb2-50"><a href="data.html#cb2-50"></a><span class="st">                        </span><span class="kw">clean_names</span>()),</span>
+<span id="cb2-51"><a href="data.html#cb2-51"></a>         <span class="dt">subset =</span> <span class="kw">map</span>(<span class="dt">.x =</span> subset0, <span class="dt">.f =</span> <span class="op">~</span><span class="kw">mutate_all</span>(.x, as_factor) <span class="op">%&gt;%</span></span>
+<span id="cb2-52"><a href="data.html#cb2-52"></a><span class="st">                        </span><span class="kw">mutate_all</span>(as.character))</span>
+<span id="cb2-53"><a href="data.html#cb2-53"></a>         )</span>
+<span id="cb2-54"><a href="data.html#cb2-54"></a></span>
+<span id="cb2-55"><a href="data.html#cb2-55"></a>dat_s_flat &lt;-<span class="st"> </span>dat_s <span class="op">%&gt;%</span></span>
+<span id="cb2-56"><a href="data.html#cb2-56"></a><span class="st">  </span><span class="co">#mutate(export = map(.x = subset, .f = ~mutate_all(.x, as.character))) %&gt;%</span></span>
+<span id="cb2-57"><a href="data.html#cb2-57"></a><span class="st">  </span><span class="co">#dplyr::select(subset) %&gt;%</span></span>
+<span id="cb2-58"><a href="data.html#cb2-58"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(country, subset) <span class="op">%&gt;%</span></span>
+<span id="cb2-59"><a href="data.html#cb2-59"></a><span class="st">  </span><span class="kw">unnest</span>()</span>
+<span id="cb2-60"><a href="data.html#cb2-60"></a></span>
+<span id="cb2-61"><a href="data.html#cb2-61"></a><span class="co"># epiDisplay::tab1(dat_s_flat$result_of_malaria_measurement)</span></span>
+<span id="cb2-62"><a href="data.html#cb2-62"></a><span class="co"># epiDisplay::tab1(dat_s_flat$result_of_malaria_rapid_test)</span></span>
+<span id="cb2-63"><a href="data.html#cb2-63"></a><span class="co"># hist(dat_s_flat$wealth_index_factor_score_5_decimals)</span></span>
+<span id="cb2-64"><a href="data.html#cb2-64"></a></span>
+<span id="cb2-65"><a href="data.html#cb2-65"></a><span class="co"># &quot;primary_sampling_unit&quot;, &quot;ultimate_area_unit&quot; iguales a &quot;cluster_number&quot;</span></span>
+<span id="cb2-66"><a href="data.html#cb2-66"></a></span>
+<span id="cb2-67"><a href="data.html#cb2-67"></a><span class="kw">write.csv</span>(dat_s_flat, <span class="st">&quot;./_dat/dat_s_flat.csv&quot;</span>, <span class="dt">na=</span><span class="st">&quot;&quot;</span>, <span class="dt">row.names =</span> F)</span></code></pre></div>
+</div>
+<div id="gps-data" class="section level2">
+<h2><span class="header-section-number">2.2</span> GPS Data</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="data.html#cb3-1"></a><span class="co">#save.image(&quot;~/mal_ineq/_dat/mal_ineq_dat3_gps.RData&quot;)</span></span>
+<span id="cb3-2"><a href="data.html#cb3-2"></a><span class="kw">load</span>(<span class="st">&quot;./_dat/mal_ineq_dat3_gps.RData&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="data.html#cb4-1"></a><span class="kw">library</span>(sf)</span>
+<span id="cb4-2"><a href="data.html#cb4-2"></a></span>
+<span id="cb4-3"><a href="data.html#cb4-3"></a>files_gps &lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="dt">path =</span> <span class="st">&quot;./_dat/GPS/&quot;</span>, <span class="dt">pattern =</span> <span class="st">&quot;*.shp&quot;</span> , <span class="dt">recursive =</span> T, <span class="dt">full.names =</span> T) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">set_colnames</span>(<span class="st">&quot;filename&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb4-4"><a href="data.html#cb4-4"></a><span class="st">  </span><span class="kw">anti_join</span>(<span class="kw">dir</span>(<span class="dt">path =</span> <span class="st">&quot;./_dat/GPS/&quot;</span>, <span class="dt">pattern =</span> <span class="st">&quot;*.xml&quot;</span> , <span class="dt">recursive =</span> T, <span class="dt">full.names =</span> T) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">data.frame</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">set_colnames</span>(<span class="st">&quot;filename&quot;</span>),</span>
+<span id="cb4-5"><a href="data.html#cb4-5"></a>            <span class="dt">by =</span> <span class="st">&quot;filename&quot;</span>)</span>
+<span id="cb4-6"><a href="data.html#cb4-6"></a></span>
+<span id="cb4-7"><a href="data.html#cb4-7"></a>dat_gps &lt;-<span class="st"> </span>files_gps <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb4-8"><a href="data.html#cb4-8"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">country =</span> <span class="kw">str_sub</span>(filename, <span class="dv">-12</span>,<span class="op">-</span><span class="dv">11</span>),</span>
+<span id="cb4-9"><a href="data.html#cb4-9"></a>         <span class="dt">type =</span> <span class="kw">str_sub</span>(filename, <span class="dv">-10</span>,<span class="op">-</span><span class="dv">9</span>),</span>
+<span id="cb4-10"><a href="data.html#cb4-10"></a>         <span class="dt">file_contents =</span> <span class="kw">map</span>(<span class="dt">.x =</span> filename, <span class="dt">.f =</span> <span class="op">~</span>sf<span class="op">::</span><span class="kw">st_read</span>(.) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">st_set_geometry</span>(<span class="ot">NULL</span>)))</span>
+<span id="cb4-11"><a href="data.html#cb4-11"></a></span>
+<span id="cb4-12"><a href="data.html#cb4-12"></a>dat_gps_flat &lt;-<span class="st"> </span>dat_gps <span class="op">%&gt;%</span></span>
+<span id="cb4-13"><a href="data.html#cb4-13"></a><span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span></span>
+<span id="cb4-14"><a href="data.html#cb4-14"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="op">-</span>DHSYEAR) <span class="op">%&gt;%</span></span>
+<span id="cb4-15"><a href="data.html#cb4-15"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></span>
+<span id="cb4-16"><a href="data.html#cb4-16"></a><span class="st">  </span><span class="kw">distinct</span>(country, DHSID, <span class="dt">.keep_all =</span> T)</span></code></pre></div>
+</div>
+<div id="adm-data" class="section level2">
+<h2><span class="header-section-number">2.3</span> ADM Data</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="data.html#cb5-1"></a>AO &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&quot;./_dat/SHP/AO/shps/sdr_subnational_boundaries.shp&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb5-2"><a href="data.html#cb5-2"></a><span class="st">  </span><span class="kw">select</span>(ISO, REGNAME) <span class="op">%&gt;%</span></span>
+<span id="cb5-3"><a href="data.html#cb5-3"></a><span class="st">  </span><span class="kw">st_cast</span>(<span class="st">&quot;MULTIPOLYGON&quot;</span>)</span>
+<span id="cb5-4"><a href="data.html#cb5-4"></a>BU &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&quot;./_dat/SHP/BU/shps/sdr_subnational_boundaries.shp&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb5-5"><a href="data.html#cb5-5"></a><span class="st">  </span><span class="kw">select</span>(ISO, REGNAME) <span class="op">%&gt;%</span></span>
+<span id="cb5-6"><a href="data.html#cb5-6"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ISO =</span> <span class="st">&quot;BU&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb5-7"><a href="data.html#cb5-7"></a><span class="st">  </span><span class="kw">st_cast</span>(<span class="st">&quot;MULTIPOLYGON&quot;</span>)</span>
+<span id="cb5-8"><a href="data.html#cb5-8"></a>LB &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&quot;./_dat/SHP/LB/shps/sdr_subnational_boundaries.shp&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb5-9"><a href="data.html#cb5-9"></a><span class="st">  </span><span class="kw">select</span>(ISO, REGNAME) <span class="op">%&gt;%</span></span>
+<span id="cb5-10"><a href="data.html#cb5-10"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ISO =</span> <span class="st">&quot;LB&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb5-11"><a href="data.html#cb5-11"></a><span class="st">  </span><span class="kw">st_cast</span>(<span class="st">&quot;MULTIPOLYGON&quot;</span>)</span>
+<span id="cb5-12"><a href="data.html#cb5-12"></a>MD &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&quot;./_dat/SHP/MD/shps/sdr_subnational_boundaries.shp&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb5-13"><a href="data.html#cb5-13"></a><span class="st">  </span><span class="kw">select</span>(ISO, REGNAME) <span class="op">%&gt;%</span></span>
+<span id="cb5-14"><a href="data.html#cb5-14"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ISO =</span> <span class="st">&quot;MD&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb5-15"><a href="data.html#cb5-15"></a><span class="st">  </span><span class="kw">st_cast</span>(<span class="st">&quot;MULTIPOLYGON&quot;</span>)</span>
+<span id="cb5-16"><a href="data.html#cb5-16"></a>TG &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&quot;./_dat/SHP/TG/shps/sdr_subnational_boundaries.shp&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb5-17"><a href="data.html#cb5-17"></a><span class="st">  </span><span class="kw">select</span>(ISO, REGNAME) <span class="op">%&gt;%</span></span>
+<span id="cb5-18"><a href="data.html#cb5-18"></a><span class="st">  </span><span class="kw">st_cast</span>(<span class="st">&quot;MULTIPOLYGON&quot;</span>)</span>
+<span id="cb5-19"><a href="data.html#cb5-19"></a>TZ &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&quot;./_dat/SHP/TZ/shps/sdr_subnational_boundaries.shp&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb5-20"><a href="data.html#cb5-20"></a><span class="st">  </span><span class="kw">select</span>(ISO, REGNAME) <span class="op">%&gt;%</span></span>
+<span id="cb5-21"><a href="data.html#cb5-21"></a><span class="st">  </span><span class="kw">st_cast</span>(<span class="st">&quot;MULTIPOLYGON&quot;</span>)</span>
+<span id="cb5-22"><a href="data.html#cb5-22"></a>UG &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&quot;./_dat/SHP/UG2/shps/sdr_subnational_boundaries.shp&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb5-23"><a href="data.html#cb5-23"></a><span class="st">  </span><span class="kw">select</span>(ISO, REGNAME) <span class="op">%&gt;%</span></span>
+<span id="cb5-24"><a href="data.html#cb5-24"></a><span class="st">  </span><span class="kw">st_cast</span>(<span class="st">&quot;MULTIPOLYGON&quot;</span>)</span>
+<span id="cb5-25"><a href="data.html#cb5-25"></a>subnat &lt;-<span class="st"> </span><span class="kw">st_read</span>(<span class="st">&quot;./_dat/SHP/sdr_subnational_data_2020-09-27/shps/sdr_subnational_data.shp&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb5-26"><a href="data.html#cb5-26"></a><span class="st">  </span><span class="kw">filter</span>(ISO <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;BF&quot;</span>,<span class="st">&quot;KE&quot;</span>,<span class="st">&quot;MW&quot;</span>,<span class="st">&quot;ML&quot;</span>,<span class="st">&quot;MZ&quot;</span>,<span class="st">&quot;SL&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb5-27"><a href="data.html#cb5-27"></a><span class="st">  </span><span class="kw">select</span>(ISO, REGNAME) <span class="op">%&gt;%</span></span>
+<span id="cb5-28"><a href="data.html#cb5-28"></a><span class="st">  </span><span class="kw">st_cast</span>(<span class="st">&quot;MULTIPOLYGON&quot;</span>)</span>
+<span id="cb5-29"><a href="data.html#cb5-29"></a></span>
+<span id="cb5-30"><a href="data.html#cb5-30"></a>spat &lt;-<span class="st"> </span><span class="kw">rbind</span>(subnat,AO) <span class="op">%&gt;%</span></span>
+<span id="cb5-31"><a href="data.html#cb5-31"></a><span class="st">  </span><span class="kw">rbind</span>(BU) <span class="op">%&gt;%</span></span>
+<span id="cb5-32"><a href="data.html#cb5-32"></a><span class="st">  </span><span class="kw">rbind</span>(LB) <span class="op">%&gt;%</span></span>
+<span id="cb5-33"><a href="data.html#cb5-33"></a><span class="st">  </span><span class="kw">rbind</span>(MD) <span class="op">%&gt;%</span></span>
+<span id="cb5-34"><a href="data.html#cb5-34"></a><span class="st">  </span><span class="kw">rbind</span>(TG) <span class="op">%&gt;%</span></span>
+<span id="cb5-35"><a href="data.html#cb5-35"></a><span class="st">  </span><span class="kw">rbind</span>(TZ) <span class="op">%&gt;%</span></span>
+<span id="cb5-36"><a href="data.html#cb5-36"></a><span class="st">  </span><span class="kw">rbind</span>(UG) <span class="op">%&gt;%</span></span>
+<span id="cb5-37"><a href="data.html#cb5-37"></a><span class="st">  </span><span class="kw">rename</span>(<span class="dt">country =</span> ISO) <span class="op">%&gt;%</span></span>
+<span id="cb5-38"><a href="data.html#cb5-38"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">REGNAME =</span> <span class="kw">toupper</span>(REGNAME),</span>
+<span id="cb5-39"><a href="data.html#cb5-39"></a>         <span class="dt">REGNAME =</span> <span class="kw">str_replace_all</span>(REGNAME, <span class="dt">pattern =</span> <span class="st">&quot;-&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot; &quot;</span>),</span>
+<span id="cb5-40"><a href="data.html#cb5-40"></a>         <span class="dt">REGNAME =</span> <span class="kw">str_replace_all</span>(REGNAME, <span class="dt">pattern =</span> <span class="st">&quot;REGION&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;&quot;</span>),</span>
+<span id="cb5-41"><a href="data.html#cb5-41"></a>         <span class="dt">REGNAME =</span> <span class="kw">str_replace_all</span>(REGNAME, <span class="dt">pattern =</span> <span class="st">&quot;PROVINCE&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;&quot;</span>),</span>
+<span id="cb5-42"><a href="data.html#cb5-42"></a>         <span class="dt">REGNAME =</span> <span class="kw">str_replace_all</span>(REGNAME, <span class="dt">pattern =</span> <span class="st">&quot;AREA&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;&quot;</span>),</span>
+<span id="cb5-43"><a href="data.html#cb5-43"></a>         <span class="dt">REGNAME =</span> <span class="kw">str_replace_all</span>(REGNAME, <span class="dt">pattern =</span> <span class="st">&quot;NORTHEASTERN&quot;</span>, </span>
+<span id="cb5-44"><a href="data.html#cb5-44"></a>                                   <span class="dt">replacement =</span> <span class="st">&quot;NORTH EASTERN&quot;</span>),</span>
+<span id="cb5-45"><a href="data.html#cb5-45"></a>         <span class="dt">REGNAME =</span> <span class="kw">str_replace_all</span>(REGNAME, <span class="dt">pattern =</span> <span class="st">&quot;NORTHERN&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;NORTH&quot;</span>),</span>
+<span id="cb5-46"><a href="data.html#cb5-46"></a>         <span class="dt">REGNAME =</span> <span class="kw">str_replace_all</span>(REGNAME, <span class="dt">pattern =</span> <span class="st">&quot;SOUTHERN&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;SOUTH&quot;</span>),</span>
+<span id="cb5-47"><a href="data.html#cb5-47"></a>         <span class="dt">REGNAME =</span> <span class="kw">str_replace_all</span>(REGNAME, <span class="dt">pattern =</span> <span class="st">&quot;GREATER&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;&quot;</span>),</span>
+<span id="cb5-48"><a href="data.html#cb5-48"></a>         <span class="dt">REGNAME =</span> <span class="kw">str_replace_all</span>(REGNAME, <span class="dt">pattern =</span> <span class="st">&quot; DE &quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot; DU &quot;</span>),</span>
+<span id="cb5-49"><a href="data.html#cb5-49"></a>         <span class="dt">REGNAME =</span> <span class="kw">str_replace_all</span>(REGNAME, <span class="dt">pattern =</span> <span class="st">&quot;KARUZI&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;KARUSI&quot;</span>),</span>
+<span id="cb5-50"><a href="data.html#cb5-50"></a>         <span class="dt">REGNAME =</span> <span class="kw">str_trim</span>(REGNAME, <span class="dt">side =</span> <span class="st">&quot;both&quot;</span>),</span>
+<span id="cb5-51"><a href="data.html#cb5-51"></a>         <span class="dt">poly =</span> <span class="dv">1</span>)</span>
+<span id="cb5-52"><a href="data.html#cb5-52"></a></span>
+<span id="cb5-53"><a href="data.html#cb5-53"></a><span class="kw">st_write</span>(spat, <span class="st">&quot;./_dat/SHP/union/DHS_adm.shp&quot;</span>)</span>
+<span id="cb5-54"><a href="data.html#cb5-54"></a></span>
+<span id="cb5-55"><a href="data.html#cb5-55"></a><span class="co">#rm(AO,BU,LB,MD,TG,TZ,UG,subnat,spat,p,p2)</span></span></code></pre></div>
+</div>
+<div id="assemble" class="section level2">
+<h2><span class="header-section-number">2.4</span> Assemble</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="data.html#cb6-1"></a>dhs_export &lt;-<span class="st"> </span>dat_s_flat <span class="op">%&gt;%</span></span>
+<span id="cb6-2"><a href="data.html#cb6-2"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(primary_sampling_unit,ultimate_area_unit)) <span class="op">%&gt;%</span></span>
+<span id="cb6-3"><a href="data.html#cb6-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">w =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(household_sample_weight_<span class="dv">6</span>_decimals), sample_weight,</span>
+<span id="cb6-4"><a href="data.html#cb6-4"></a>                    household_sample_weight_<span class="dv">6</span>_decimals),</span>
+<span id="cb6-5"><a href="data.html#cb6-5"></a>         <span class="dt">REGNAME =</span> <span class="kw">ifelse</span>(country<span class="op">==</span><span class="st">&quot;BU&quot;</span> <span class="op">|</span><span class="st"> </span>country<span class="op">==</span><span class="st">&quot;MZ&quot;</span>, province,</span>
+<span id="cb6-6"><a href="data.html#cb6-6"></a>                    region),</span>
+<span id="cb6-7"><a href="data.html#cb6-7"></a>         <span class="dt">wealth =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(wealth_index_factor_score_<span class="dv">5</span>_decimals), </span>
+<span id="cb6-8"><a href="data.html#cb6-8"></a>                         wealth_index_factor_score_combined_<span class="dv">5</span>_decimals,</span>
+<span id="cb6-9"><a href="data.html#cb6-9"></a>                         wealth_index_factor_score_<span class="dv">5</span>_decimals),</span>
+<span id="cb6-10"><a href="data.html#cb6-10"></a>         <span class="dt">rapid_test0 =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(result_of_rapid_test_of_malaria), result_of_malaria_rapid_test_<span class="dv">2</span>,</span>
+<span id="cb6-11"><a href="data.html#cb6-11"></a>                             result_of_rapid_test_of_malaria),</span>
+<span id="cb6-12"><a href="data.html#cb6-12"></a>         <span class="dt">rapid_test0 =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(rapid_test0), result_of_malaria_rapid_test,</span>
+<span id="cb6-13"><a href="data.html#cb6-13"></a>                             rapid_test0),</span>
+<span id="cb6-14"><a href="data.html#cb6-14"></a>         <span class="co"># rapid_test0 = ifelse(result_of_rapid_test_of_malaria==&quot;&quot;, result_of_malaria_rapid_test_2,</span></span>
+<span id="cb6-15"><a href="data.html#cb6-15"></a>         <span class="co">#                     result_of_rapid_test_of_malaria),</span></span>
+<span id="cb6-16"><a href="data.html#cb6-16"></a>         <span class="co"># rapid_test0 = ifelse(rapid_test0==&quot;&quot;, result_of_malaria_rapid_test,</span></span>
+<span id="cb6-17"><a href="data.html#cb6-17"></a>         <span class="co">#                     rapid_test0),</span></span>
+<span id="cb6-18"><a href="data.html#cb6-18"></a>         <span class="dt">rapid_test =</span> <span class="kw">ifelse</span>(<span class="kw">str_detect</span>(rapid_test0, <span class="st">&quot;positive&quot;</span>), <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb6-19"><a href="data.html#cb6-19"></a>         <span class="dt">rapid_test =</span> <span class="kw">ifelse</span>(rapid_test0<span class="op">==</span><span class="st">&quot;&quot;</span>, <span class="ot">NA</span>, rapid_test),</span>
+<span id="cb6-20"><a href="data.html#cb6-20"></a>         <span class="dt">education =</span> <span class="kw">recode</span>(mothers_highest_educational_level, <span class="st">&quot;9&quot;</span> =<span class="st"> &quot;0_dontknow&quot;</span>,</span>
+<span id="cb6-21"><a href="data.html#cb6-21"></a>                            <span class="st">&quot;don&#39;t know&quot;</span> =<span class="st"> &quot;0_dontknow&quot;</span>,</span>
+<span id="cb6-22"><a href="data.html#cb6-22"></a>                            <span class="st">&quot;no education&quot;</span> =<span class="st"> &quot;1_noeducation&quot;</span>,</span>
+<span id="cb6-23"><a href="data.html#cb6-23"></a>                            <span class="st">&quot;no education / pre-primary&quot;</span> =<span class="st"> &quot;1_noeducation&quot;</span>,</span>
+<span id="cb6-24"><a href="data.html#cb6-24"></a>                            <span class="st">&quot;elementary (1-6)&quot;</span> =<span class="st"> &quot;2_elementary/primary&quot;</span>,</span>
+<span id="cb6-25"><a href="data.html#cb6-25"></a>                            <span class="st">&quot;primary&quot;</span> =<span class="st"> &quot;2_elementary/primary&quot;</span>,</span>
+<span id="cb6-26"><a href="data.html#cb6-26"></a>                            <span class="st">&quot;junior high (7-9)&quot;</span> =<span class="st"> &quot;3_junorsenhigh/secondary&quot;</span>,</span>
+<span id="cb6-27"><a href="data.html#cb6-27"></a>                            <span class="st">&quot;secondary&quot;</span> =<span class="st"> &quot;3_junorsenhigh/secondary&quot;</span>,</span>
+<span id="cb6-28"><a href="data.html#cb6-28"></a>                            <span class="st">&quot;senior high (10-12)&quot;</span> =<span class="st"> &quot;3_junorsenhigh/secondary&quot;</span>,</span>
+<span id="cb6-29"><a href="data.html#cb6-29"></a>                            <span class="st">&quot;higher&quot;</span> =<span class="st"> &quot;4_higher&quot;</span>),</span>
+<span id="cb6-30"><a href="data.html#cb6-30"></a>         <span class="dt">edu =</span> <span class="kw">as.numeric</span>(<span class="kw">as.factor</span>(education)),</span>
+<span id="cb6-31"><a href="data.html#cb6-31"></a>         <span class="dt">edu =</span> <span class="kw">ifelse</span>(edu<span class="op">==</span><span class="dv">1</span>,<span class="ot">NA</span>,edu<span class="dv">-1</span>))</span>
+<span id="cb6-32"><a href="data.html#cb6-32"></a></span>
+<span id="cb6-33"><a href="data.html#cb6-33"></a>gps_export &lt;-<span class="st"> </span>dat_gps_flat <span class="op">%&gt;%</span></span>
+<span id="cb6-34"><a href="data.html#cb6-34"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></span>
+<span id="cb6-35"><a href="data.html#cb6-35"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cluster_number =</span> <span class="kw">as.character</span>(DHSCLUST)) <span class="op">%&gt;%</span></span>
+<span id="cb6-36"><a href="data.html#cb6-36"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(country, DHSID, DHSYEAR, cluster_number, URBAN_RURA, LATNUM, LONGNUM, ALT_DEM, DATUM) <span class="op">%&gt;%</span></span>
+<span id="cb6-37"><a href="data.html#cb6-37"></a><span class="st">  </span><span class="kw">arrange</span>(<span class="op">-</span>DHSYEAR) <span class="op">%&gt;%</span></span>
+<span id="cb6-38"><a href="data.html#cb6-38"></a><span class="st">  </span><span class="kw">distinct</span>(country, cluster_number, <span class="dt">.keep_all =</span> T)</span>
+<span id="cb6-39"><a href="data.html#cb6-39"></a></span>
+<span id="cb6-40"><a href="data.html#cb6-40"></a><span class="kw">write.csv</span>(gps_export, <span class="st">&quot;./_dat/dat_gps_flat.csv&quot;</span>, <span class="dt">na=</span><span class="st">&quot;&quot;</span>, <span class="dt">row.names =</span> F)</span>
+<span id="cb6-41"><a href="data.html#cb6-41"></a></span>
+<span id="cb6-42"><a href="data.html#cb6-42"></a>dat_export &lt;-<span class="st"> </span>dhs_export <span class="op">%&gt;%</span></span>
+<span id="cb6-43"><a href="data.html#cb6-43"></a><span class="st">  </span><span class="kw">inner_join</span>(gps_export, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;cluster_number&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb6-44"><a href="data.html#cb6-44"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">REGNAME =</span> <span class="kw">toupper</span>(REGNAME),</span>
+<span id="cb6-45"><a href="data.html#cb6-45"></a>         <span class="dt">REGNAME =</span> <span class="kw">str_replace_all</span>(REGNAME, <span class="dt">pattern =</span> <span class="st">&quot;-&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot; &quot;</span>),</span>
+<span id="cb6-46"><a href="data.html#cb6-46"></a>         <span class="dt">REGNAME =</span> <span class="kw">str_replace_all</span>(REGNAME, <span class="dt">pattern =</span> <span class="st">&quot;REGION&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;&quot;</span>),</span>
+<span id="cb6-47"><a href="data.html#cb6-47"></a>         <span class="dt">REGNAME =</span> <span class="kw">str_replace_all</span>(REGNAME, <span class="dt">pattern =</span> <span class="st">&quot;PROVINCE&quot;</span>, </span>
+<span id="cb6-48"><a href="data.html#cb6-48"></a>                                   <span class="dt">replacement =</span> <span class="st">&quot;&quot;</span>),</span>
+<span id="cb6-49"><a href="data.html#cb6-49"></a>         <span class="dt">REGNAME =</span> <span class="kw">str_replace_all</span>(REGNAME, <span class="dt">pattern =</span> <span class="st">&quot;AREA&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;&quot;</span>),</span>
+<span id="cb6-50"><a href="data.html#cb6-50"></a>         <span class="dt">REGNAME =</span> <span class="kw">str_replace_all</span>(REGNAME, <span class="dt">pattern =</span> <span class="st">&quot;NORTHEASTERN&quot;</span>, </span>
+<span id="cb6-51"><a href="data.html#cb6-51"></a>                                   <span class="dt">replacement =</span> <span class="st">&quot;NORTH EASTERN&quot;</span>),</span>
+<span id="cb6-52"><a href="data.html#cb6-52"></a>         <span class="dt">REGNAME =</span> <span class="kw">str_replace_all</span>(REGNAME, <span class="dt">pattern =</span> <span class="st">&quot;NORTHERN&quot;</span>, </span>
+<span id="cb6-53"><a href="data.html#cb6-53"></a>                                   <span class="dt">replacement =</span> <span class="st">&quot;NORTH&quot;</span>),</span>
+<span id="cb6-54"><a href="data.html#cb6-54"></a>         <span class="dt">REGNAME =</span> <span class="kw">str_replace_all</span>(REGNAME, <span class="dt">pattern =</span> <span class="st">&quot;SOUTHERN&quot;</span>, </span>
+<span id="cb6-55"><a href="data.html#cb6-55"></a>                                   <span class="dt">replacement =</span> <span class="st">&quot;SOUTH&quot;</span>),</span>
+<span id="cb6-56"><a href="data.html#cb6-56"></a>         <span class="dt">REGNAME =</span> <span class="kw">str_replace_all</span>(REGNAME, <span class="dt">pattern =</span> <span class="st">&quot;GREATER&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;&quot;</span>),</span>
+<span id="cb6-57"><a href="data.html#cb6-57"></a>         <span class="dt">REGNAME =</span> <span class="kw">str_replace_all</span>(REGNAME, <span class="dt">pattern =</span> <span class="st">&quot; DE &quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot; DU &quot;</span>),</span>
+<span id="cb6-58"><a href="data.html#cb6-58"></a>         <span class="dt">REGNAME =</span> <span class="kw">str_replace_all</span>(REGNAME, <span class="dt">pattern =</span> <span class="st">&quot;KARUZI&quot;</span>, </span>
+<span id="cb6-59"><a href="data.html#cb6-59"></a>                                   <span class="dt">replacement =</span> <span class="st">&quot;KARUSI&quot;</span>),</span>
+<span id="cb6-60"><a href="data.html#cb6-60"></a>         <span class="dt">REGNAME =</span> <span class="kw">str_trim</span>(REGNAME, <span class="dt">side =</span> <span class="st">&quot;both&quot;</span>))</span>
+<span id="cb6-61"><a href="data.html#cb6-61"></a></span>
+<span id="cb6-62"><a href="data.html#cb6-62"></a><span class="kw">write.csv</span>(dat_export, <span class="st">&quot;./_dat/dat_mal_ineq_v2.csv&quot;</span>, <span class="dt">na=</span><span class="st">&quot;&quot;</span>, <span class="dt">row.names =</span> F)</span>
+<span id="cb6-63"><a href="data.html#cb6-63"></a><span class="co"># </span></span>
+<span id="cb6-64"><a href="data.html#cb6-64"></a><span class="co"># epiDisplay::tab1(dat_s_flat$result_of_rapid_test_of_malaria)</span></span>
+<span id="cb6-65"><a href="data.html#cb6-65"></a><span class="co"># epiDisplay::tab1(dat_s_flat$result_of_rapid_test_of_malaria)</span></span>
+<span id="cb6-66"><a href="data.html#cb6-66"></a><span class="co"># epiDisplay::tab1(dhs_export$result_of_rapid_test_of_malaria)</span></span>
+<span id="cb6-67"><a href="data.html#cb6-67"></a><span class="co"># epiDisplay::tab1(dhs_export$rapid_test0)</span></span>
+<span id="cb6-68"><a href="data.html#cb6-68"></a><span class="co"># epiDisplay::tab1(dhs_export$rapid_test)</span></span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analysis-wealth.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["mal_ineq.pdf", "mal_ineq.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
